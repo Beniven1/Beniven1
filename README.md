@@ -1,4 +1,4 @@
-### Hi there 👋
+### Go to my website
 
 <!--
 **Beniven1/Beniven1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
