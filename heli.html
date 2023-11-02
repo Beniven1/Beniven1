@@ -56,7 +56,7 @@
   </header>
   
   <div class="content">
-    <p>Welcome to the Helicopter Game! You can play the game right here. Tap the screen to make the helicopter go up. Avoid obstacles and collect points.</p>
+    <p>Welcome to the Helicopter Game! You can play the game right here. Tap the screen to make the helicopter go up.</p>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
     <p>Points: <span id="points">0</span></p>
   </div>
@@ -75,8 +75,6 @@
     const obstacles = [];
     let score = 0;
     const pointsElement = document.getElementById('points');
-    const obstacleWidth = 50;
-    const obstacleHeight = canvas.height / 2;
     
     // Mobile touch control
     canvas.addEventListener('touchstart', () => {
@@ -92,19 +90,21 @@
       for (let i = 0; i < obstacles.length; i++) {
         const obstacle = obstacles[i];
         context.fillStyle = 'green';
-        context.fillRect(obstacle.x, 0, obstacleWidth, obstacleHeight);
+        context.fillRect(obstacle.x, 0, obstacle.width, canvas.height);
+        context.fillStyle = 'black';
+        context.fillRect(obstacle.x, canvas.height / 2 - obstacle.height / 2, obstacle.width, obstacle.height);
         obstacle.x -= 2; // Adjust the speed of obstacles
 
         if (
           helicopter.x + helicopter.width > obstacle.x &&
-          helicopter.x < obstacle.x + obstacleWidth &&
-          (helicopter.y < obstacleHeight || helicopter.y + helicopter.height > canvas.height - obstacleHeight)
+          helicopter.x < obstacle.x + obstacle.width &&
+          (helicopter.y < canvas.height / 2 - obstacle.height / 2 || helicopter.y + helicopter.height > canvas.height / 2 + obstacle.height / 2)
         ) {
           // Collision detected, reset game
           resetGame();
         }
 
-        if (obstacle.x + obstacleWidth < 0) {
+        if (obstacle.x + obstacle.width < 0) {
           score++;
           pointsElement.innerText = score;
           obstacles.splice(i, 1);
@@ -127,7 +127,9 @@
     }
 
     function createObstacle() {
-      obstacles.push({ x: canvas.width, width: obstacleWidth });
+      const obstacleWidth = 20 + Math.random() * 80;
+      const obstacleHeight = 50 + Math.random() * 100;
+      obstacles.push({ x: canvas.width, width: obstacleWidth, height: obstacleHeight });
     }
 
     function resetGame() {
