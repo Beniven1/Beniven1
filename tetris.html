@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>About Me</title>
+  <title>Tetris</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
   <style>
     body {
@@ -11,7 +11,7 @@
     }
 
     header {
-      background-color: #0077B6;
+      background-color: #004E98;
       padding: 20px;
       text-align: center;
     }
@@ -26,7 +26,7 @@
     }
 
     nav {
-      background-color: #004E98;
+      background-color: #0077B6;
       text-align: center;
       padding: 10px;
     }
@@ -36,20 +36,52 @@
       text-decoration: none;
       margin: 0 10px;
     }
+
+    #tetris-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>About Me</h1>
+    <h1>Tetris</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
+      <a href="tetris.html">Tetris</a>
     </nav>
   </header>
   
   <div class="content">
-    <p>Hello! Welcome to my website. I'm Beniven, and I enjoy programming and creating Minecraft mods. Thanks for visiting!</p>
+    <p>Welcome to the Tetris game page! You can play Tetris right here.</p>
+    <div id="tetris-container">
+      <div id="game-board"></div>
+    </div>
   </div>
+
+  <script>
+    const gameBoard = document.getElementById('game-board');
+    const numRows = 20;
+    const numCols = 10;
+    const blockSize = 30;
+
+    // Create the game board
+    for (let row = 0; row < numRows; row++) {
+      for (let col = 0; col < numCols; col++) {
+        const block = document.createElement('div');
+        block.classList.add('block');
+        block.style.width = `${blockSize}px`;
+        block.style.height = `${blockSize}px`;
+        block.style.top = `${row * blockSize}px`;
+        block.style.left = `${col * blockSize}px`;
+        gameBoard.appendChild(block);
+      }
+    }
+  </script>
 </body>
 </html>
