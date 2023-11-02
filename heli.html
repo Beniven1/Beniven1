@@ -56,8 +56,8 @@
     </nav>
   </header>
   
-  <div class="content">
-    <p>Welcome to the Helicopter Game! You can play the game right here. Tap the screen to make the helicopter go up.</p>
+  <div class "content" onclick="jump()">
+    <p>Welcome to the Helicopter Game! Tap anywhere to make the helicopter go up.</p>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
     <p>Points: <span id="points">0</span></p>
   </div>
@@ -76,11 +76,11 @@
     const obstacles = [];
     let score = 0;
     const pointsElement = document.getElementById('points');
+    let lastObstacleX = canvas.width;
     
-    // Mobile touch control
-    canvas.addEventListener('touchstart', () => {
+    function jump() {
       helicopter.speedY = -3;
-    });
+    }
 
     function drawHelicopter() {
       context.fillStyle = 'red';
@@ -128,10 +128,17 @@
 
     function createObstacle() {
       const obstacleWidth = 20 + Math.random() * 80;
-      const space = 100 + Math.random() * 100;
+      const space = 120 + Math.random() * 80;
       const topHeight = Math.random() * (canvas.height - space);
       const bottomHeight = canvas.height - space - topHeight;
-      obstacles.push({ x: canvas.width, width: obstacleWidth, topHeight, bottomHeight, bottomY: canvas.height - bottomHeight });
+      obstacles.push({
+        x: lastObstacleX + 200 + Math.random() * 200,
+        width: obstacleWidth,
+        topHeight,
+        bottomHeight,
+        bottomY: canvas.height - bottomHeight
+      });
+      lastObstacleX = obstacles[obstacles.length - 1].x;
     }
 
     function resetGame() {
@@ -140,6 +147,7 @@
       pointsElement.innerText = score;
       helicopter.y = canvas.height / 2;
       helicopter.speedY = 0;
+      lastObstacleX = canvas.width;
     }
 
     setInterval(createObstacle, 3000); // Create obstacles every 3 seconds with varying heights
