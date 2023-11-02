@@ -76,10 +76,12 @@
     const obstacles = [];
     let score = 0;
     const pointsElement = document.getElementById('points');
+    const obstacleWidth = 50;
+    const obstacleHeight = canvas.height / 3;
     
     // Mobile touch control
     canvas.addEventListener('touchstart', () => {
-      helicopter.speedY = -5; // Increase the value to make the helicopter go up faster
+      helicopter.speedY = -3; // Reduce the jump height
     });
 
     function drawHelicopter() {
@@ -91,21 +93,21 @@
       for (let i = 0; i < obstacles.length; i++) {
         const obstacle = obstacles[i];
         context.fillStyle = 'green';
-        context.fillRect(obstacle.x, 0, obstacle.width, canvas.height);
+        context.fillRect(obstacle.x, 0, obstacleWidth, canvas.height);
         context.fillStyle = 'black';
-        context.fillRect(obstacle.x, canvas.height / 2 - obstacle.height / 2, obstacle.width, obstacle.height);
+        context.fillRect(obstacle.x, canvas.height / 2 - obstacleHeight / 2, obstacleWidth, obstacleHeight);
         obstacle.x -= 2; // Adjust the speed of obstacles
 
         if (
           helicopter.x + helicopter.width > obstacle.x &&
-          helicopter.x < obstacle.x + obstacle.width &&
-          (helicopter.y < canvas.height / 2 - obstacle.height / 2 || helicopter.y + helicopter.height > canvas.height / 2 + obstacle.height / 2)
+          helicopter.x < obstacle.x + obstacleWidth &&
+          (helicopter.y < canvas.height / 2 - obstacleHeight / 2 || helicopter.y + helicopter.height > canvas.height / 2 + obstacleHeight / 2)
         ) {
           // Collision detected, reset game
           resetGame();
         }
 
-        if (obstacle.x + obstacle.width < 0) {
+        if (obstacle.x + obstacleWidth < 0) {
           score++;
           pointsElement.innerText = score;
           obstacles.splice(i, 1);
@@ -129,7 +131,6 @@
 
     function createObstacle() {
       const obstacleWidth = 20 + Math.random() * 80;
-      const obstacleHeight = 50 + Math.random() * 100;
       obstacles.push({ x: canvas.width, width: obstacleWidth, height: obstacleHeight });
     }
 
@@ -141,7 +142,7 @@
       helicopter.speedY = 0;
     }
 
-    setInterval(createObstacle, 2000); // Create obstacles every 2 seconds
+    setInterval(createObstacle, 3000); // Create obstacles every 3 seconds to increase distance
 
     updateGameArea();
   </script>
