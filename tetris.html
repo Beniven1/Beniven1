@@ -8,6 +8,8 @@
       background-color: #D2B48C;
       color: white;
       font-family: "Poppins", sans-serif;
+      margin: 0;
+      overflow: hidden;
     }
 
     header {
@@ -23,65 +25,141 @@
 
     .content {
       padding: 20px;
-    }
-
-    nav {
-      background-color: #0077B6;
       text-align: center;
-      padding: 10px;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 10px;
+    canvas {
+      display: block;
+      background-color: black;
+      margin: 0 auto;
     }
 
-    #tetris-container {
+    #controls {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-height: 80vh;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Tetris</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-      <a href="tetris.html">Tetris</a>
-    </nav>
   </header>
   
   <div class="content">
-    <p>Welcome to the Tetris game page! You can play Tetris right here.</p>
-    <div id="tetris-container">
-      <div id="game-board"></div>
+    <p>Use arrow keys or on-screen controls to play.</p>
+    <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+    <p>Score: <span id="score">0</span></p>
+    <div id="controls">
+      <button id="leftButton">Left</button>
+      <button id="rotateButton">Rotate</button>
+      <button id="rightButton">Right</button>
+      <button id="downButton">Down</button>
     </div>
   </div>
-
+  
   <script>
-    const gameBoard = document.getElementById('game-board');
-    const numRows = 20;
-    const numCols = 10;
+    const canvas = document.getElementById('tetrisCanvas');
+    const context = canvas.getContext('2d');
     const blockSize = 30;
+    const rows = canvas.height / blockSize;
+    const cols = canvas.width / blockSize;
+    const emptyBlock = 'black';
 
-    // Create the game board
-    for (let row = 0; row < numRows; row++) {
-      for (let col = 0; col < numCols; col++) {
-        const block = document.createElement('div');
-        block.classList.add('block');
-        block.style.width = `${blockSize}px`;
-        block.style.height = `${blockSize}px`;
-        block.style.top = `${row * blockSize}px`;
-        block.style.left = `${col * blockSize}px`;
-        gameBoard.appendChild(block);
-      }
+    // Define Tetris shapes and their colors
+    const tetrominos = {
+      'I': { color: 'cyan', shape: [[1, 1, 1, 1]] },
+      'J': { color: 'blue', shape: [[1, 1, 1], [0, 0, 1]] },
+      'L': { color: 'orange', shape: [[1, 1, 1], [1, 0, 0]] },
+      'O': { color: 'yellow', shape: [[1, 1], [1, 1]] },
+      'S': { color: 'lime', shape: [[0, 1, 1], [1, 1, 0]] },
+      'T': { color: 'purple', shape: [[1, 1, 1], [0, 1, 0]] },
+      'Z': { color: 'red', shape: [[1, 1, 0], [0, 1, 1]] },
+    };
+
+    // Initialize the game board
+    const board = [];
+    for (let row = 0; row < rows; row++) {
+      board[row] = Array(cols).fill(emptyBlock);
     }
+
+    // Tetris piece
+    const tetromino = {
+      shape: [],
+      color: '',
+      x: 0,
+      y: 0,
+    };
+
+    // Functions for drawing and updating the game
+
+    // ...
+
+    // Handle user input for controls
+
+    // Desktop controls
+    const leftButton = document.getElementById('leftButton');
+    const rotateButton = document.getElementById('rotateButton');
+    const rightButton = document.getElementById('rightButton');
+    const downButton = document.getElementById('downButton');
+
+    let gameOver = false;
+    let score = 0;
+
+    document.addEventListener('keydown', (event) => {
+      if (gameOver) return;
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          moveTetrominoLeft();
+          break;
+        case 'ArrowRight':
+          moveTetrominoRight();
+          break;
+        case 'ArrowDown':
+          moveTetrominoDown();
+          break;
+        case 'ArrowUp':
+          rotateTetromino();
+          break;
+      }
+    });
+
+    leftButton.addEventListener('click', () => {
+      if (gameOver) return;
+      moveTetrominoLeft();
+    });
+
+    rotateButton.addEventListener('click', () => {
+      if (gameOver) return;
+      rotateTetromino();
+    });
+
+    rightButton.addEventListener('click', () => {
+      if (gameOver) return;
+      moveTetrominoRight();
+    });
+
+    downButton.addEventListener('click', () => {
+      if (gameOver) return;
+      moveTetrominoDown();
+    });
+
+    // ...
+
+    // Implement the Tetris game logic (e.g., collision detection, line clearing, scoring)
+
+    // Main game loop for updating and rendering the game
+
+    // Start the game by spawning the first tetromino
+    tetromino = getRandomTetromino();
+    updateGameArea();
   </script>
 </body>
 </html>
