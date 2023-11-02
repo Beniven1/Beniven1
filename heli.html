@@ -93,8 +93,6 @@
         context.fillStyle = 'green';
         context.fillRect(obstacle.x, 0, obstacle.width, obstacle.topHeight);
         context.fillRect(obstacle.x, obstacle.bottomY, obstacle.width, obstacle.bottomHeight);
-        context.fillStyle = 'black';
-        context.fillRect(obstacle.x, obstacle.topHeight, obstacle.width, canvas.height - obstacle.topHeight - obstacle.bottomHeight);
         obstacle.x -= 2;
 
         if (
