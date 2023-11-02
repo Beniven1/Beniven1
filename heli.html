@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Helicopter Game</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+  <style>
+    body {
+      background-color: #D2B48C;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: #004E98;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #0077B6;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Helicopter Game</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="tetris.html">Tetris</a>
+      <a href="heli.html">Heli</a>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <p>Welcome to the Helicopter Game! You can play the game right here.</p>
+    <canvas id="gameCanvas"></canvas>
+  </div>
+  
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const context = canvas.getContext('2d');
+    const helicopter = {
+      x: 50,
+      y: canvas.height / 2,
+      width: 50,
+      height: 20,
+      speedY: 0,
+      gravity: 0.2,
+    };
+    const obstacles = [];
+
+    function drawHelicopter() {
+      context.fillStyle = 'red';
+      context.fillRect(helicopter.x, helicopter.y, helicopter.width, helicopter.height);
+    }
+
+    function drawObstacles() {
+      for (let i = 0; i < obstacles.length; i++) {
+        const obstacle = obstacles[i];
+        context.fillStyle = 'green';
+        context.fillRect(obstacle.x, 0, obstacle.width, obstacle.height);
+      }
+    }
+
+    function updateGameArea() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      helicopter.speedY += helicopter.gravity;
+      helicopter.y += helicopter.speedY;
+      if (helicopter.y > canvas.height - helicopter.height) {
+        helicopter.y = canvas.height - helicopter.height;
+        helicopter.speedY = 0;
+      }
+      drawHelicopter();
+      drawObstacles();
+      requestAnimationFrame(updateGameArea);
+    }
+
+    function createObstacle() {
+      const obstacleWidth = 20 + Math.random() * 50;
+      const obstacleHeight = 50 + Math.random() * 150;
+      obstacles.push({ x: canvas.width, width: obstacleWidth, height: obstacleHeight });
+    }
+
+    setInterval(createObstacle, 2000); // Create obstacles every 2 seconds
+
+    updateGameArea();
+  </script>
+</body>
+</html>
