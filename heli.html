@@ -92,7 +92,7 @@
         const obstacle = obstacles[i];
         context.fillStyle = 'green';
         context.fillRect(obstacle.x, 0, obstacle.width, obstacle.topHeight);
-        context.fillRect(obstacle.x, canvas.height - obstacle.bottomHeight, obstacle.width, obstacle.bottomHeight);
+        context.fillRect(obstacle.x, obstacle.bottomY, obstacle.width, obstacle.bottomHeight);
         context.fillStyle = 'black';
         context.fillRect(obstacle.x, obstacle.topHeight, obstacle.width, canvas.height - obstacle.topHeight - obstacle.bottomHeight);
         obstacle.x -= 2;
@@ -100,7 +100,7 @@
         if (
           helicopter.x + helicopter.width > obstacle.x &&
           helicopter.x < obstacle.x + obstacle.width &&
-          (helicopter.y < obstacle.topHeight || helicopter.y + helicopter.height > canvas.height - obstacle.bottomHeight)
+          (helicopter.y < obstacle.topHeight || helicopter.y + helicopter.height > obstacle.bottomY)
         ) {
           // Collision detected, reset game
           resetGame();
@@ -133,7 +133,7 @@
       const space = 100 + Math.random() * 100;
       const topHeight = Math.random() * (canvas.height - space);
       const bottomHeight = canvas.height - space - topHeight;
-      obstacles.push({ x: canvas.width, width: obstacleWidth, topHeight, bottomHeight });
+      obstacles.push({ x: canvas.width, width: obstacleWidth, topHeight, bottomHeight, bottomY: canvas.height - bottomHeight });
     }
 
     function resetGame() {
