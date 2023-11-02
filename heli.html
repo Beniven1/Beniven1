@@ -56,7 +56,7 @@
   </header>
   
   <div class="content">
-    <p>Welcome to the Helicopter Game! You can play the game right here.</p>
+    <p>Welcome to the Helicopter Game! You can play the game right here. Tap the screen to make the helicopter go up.</p>
     <canvas id="gameCanvas"></canvas>
   </div>
   
@@ -72,6 +72,11 @@
       gravity: 0.2,
     };
     const obstacles = [];
+    
+    // Mobile touch control
+    canvas.addEventListener('touchstart', () => {
+      helicopter.speedY = -5; // Increase the value to make the helicopter go up faster
+    });
 
     function drawHelicopter() {
       context.fillStyle = 'red';
@@ -83,6 +88,7 @@
         const obstacle = obstacles[i];
         context.fillStyle = 'green';
         context.fillRect(obstacle.x, 0, obstacle.width, obstacle.height);
+        obstacle.x -= 2; // Adjust the speed of obstacles
       }
     }
 
