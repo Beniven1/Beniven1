@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>About Site</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+  <style>
+    body {
+      background-color: #D2B48C;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: #004E98;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #0077B6;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .countdown {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Site</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="tetris.html">Tetris</a>
+      <a href="heli.html">Heli</a>
+      <a href="about-site.html">About Site</a>
+      <a href="nexxa.html">Nexxa</a>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <p>This site was created on Halloween (October 31).</p>
+    <p class="countdown" id="countdown"></p>
+  </div>
+
+  <script>
+    const halloweenDate = new Date('2023-10-31').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeDifference = halloweenDate - now;
+
+      if (timeDifference < 0) {
+        document.getElementById('countdown').textContent = 'Halloween has passed!';
+      } else {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s until Halloween!`;
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
