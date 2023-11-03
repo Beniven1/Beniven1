@@ -28,6 +28,18 @@
       text-align: center;
     }
 
+        nav {
+      background-color: #0077B6;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
   canvas {
     border: 1px solid white;
   }
@@ -60,7 +72,7 @@
   </header>
   
   <div class="content">
-    <p>Use arrow keys or on-screen controls to play.</p>
+    <p>Use arrow keys to play.</p>
     <canvas width="320" height="640" id="game"></canvas>
     </div>
   </div>
@@ -352,55 +364,6 @@ document.addEventListener('keydown', function(e) {
 
     tetromino.row = row;
   }
-});
-    // Event listeners for control buttons
-const leftButton = document.getElementById('leftButton');
-const rightButton = document.getElementById('rightButton');
-const rotateButton = document.getElementById('rotateButton');
-const dropButton = document.getElementById('dropButton');
-
-leftButton.addEventListener('click', () => {
-  if (gameOver) return;
-
-  // Implement the logic to move the Tetris piece to the left
-  const col = tetromino.col - 1;
-  if (isValidMove(tetromino.matrix, tetromino.row, col)) {
-    tetromino.col = col;
-  }
-});
-
-rightButton.addEventListener('click', () => {
-  if (gameOver) return;
-
-  // Implement the logic to move the Tetris piece to the right
-  const col = tetromino.col + 1;
-  if (isValidMove(tetromino.matrix, tetromino.row, col)) {
-    tetromino.col = col;
-  }
-});
-
-rotateButton.addEventListener('click', () => {
-  if (gameOver) return;
-
-  // Implement the logic to rotate the Tetris piece
-  const matrix = rotate(tetromino.matrix);
-  if (isValidMove(matrix, tetromino.row, tetromino.col)) {
-    tetromino.matrix = matrix;
-  }
-});
-
-dropButton.addEventListener('click', () => {
-  if (gameOver) return;
-
-  // Implement the logic to make the Tetris piece drop instantly
-  let row = tetromino.row + 1;
-
-  while (isValidMove(tetromino.matrix, row, tetromino.col)) {
-    tetromino.row = row;
-    row++;
-  }
-
-  placeTetromino();
 });
 
 
