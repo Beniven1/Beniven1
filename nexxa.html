@@ -114,33 +114,32 @@
   
   <!-- Solar System Illustration -->
   <div id="solar-system">
-    <!-- Sun -->
-    <div class="planet" id="sun"></div>
     <!-- Planets and Moons -->
-    <div class="planet" id="mercury"></div>
-    <div class="planet" id="venus"></div>
-    <div class="planet" id="earth"></div>
-    <div class="planet" id="moon"></div>
-    <div class="planet" id="mars"></div>
-    <!-- Add more planets and moons as needed -->
+    <div class="planet" id="sun" style="left: 275px; top: 275px;"></div>
+    <div class="planet" id="mercury" style="left: 350px; top: 275px;"></div>
+    <div class="planet" id="venus" style="left: 450px; top: 275px;"></div>
+    <div class="planet" id="earth" style="left: 600px; top: 275px;"></div>
+    <div class="planet" id="moon" style="left: 625px; top: 275px;"></div>
+    <div class="planet" id="mars" style="left: 800px; top: 275px;"></div>
+    <!-- Add more planets and moons here -->
   </div>
 
-  <script>
+   <script>
     const solarSystem = document.getElementById("solar-system");
     const planets = [
-      { id: "sun", radius: 0, speed: 0.001, color: "#ffcc00" }, /* Yellow */
-      { id: "mercury", radius: 100, speed: 0.002, color: "#b0b0b0" }, /* Gray */
-      { id: "venus", radius: 150, speed: 0.0015, color: "#ff9900" }, /* Orange */
-      { id: "earth", radius: 200, speed: 0.001, color: "#3399ff" }, /* Blue */
-      { id: "moon", radius: 30, speed: 0.003, color: "#d9d9d9" }, /* Light Gray */
-      { id: "mars", radius: 250, speed: 0.0008, color: "#ff3300" } /* Red */
-      // Add more planets and moons here
+      { id: "sun", radius: 0, speed: 0.01, color: "#ffcc00" }, /* Yellow */
+      { id: "mercury", radius: 75, speed: 0.02, color: "#b0b0b0" }, /* Gray */
+      { id: "venus", radius: 100, speed: 0.015, color: "#ff9900" }, /* Orange */
+      { id: "earth", radius: 150, speed: 0.01, color: "#3399ff" }, /* Blue */
+      { id: "moon", radius: 160, speed: 0.03, color: "#d9d9d9" }, /* Light Gray */
+      { id: "mars", radius: 220, speed: 0.008, color: "#ff3300" } /* Red */
     ];
 
     const planetElements = planets.map(planet => document.getElementById(planet.id));
 
     function updateSolarSystem() {
-      const time = Date.now();
+      const time = performance.now() * 0.001;
+
       planets.forEach((planet, index) => {
         const angle = planet.speed * time;
         const x = planet.radius * Math.cos(angle);
