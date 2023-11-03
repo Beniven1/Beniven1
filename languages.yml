@@ -8,5 +8,6 @@ Hourglass:
   extensions:
   - ".dev"
   - ".web"
-  - ".dat"
+  - ".dat
+  - ".html"
   language_id: 425386
