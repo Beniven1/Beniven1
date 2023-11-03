@@ -56,8 +56,8 @@
     </nav>
   </header>
   
-  <div class "content" onclick="jump()">
-    <p>Welcome to the Helicopter Game! Tap anywhere to make the helicopter go up.</p>
+  <div class="content">
+    <p>Welcome to the Helicopter Game! Click anywhere to move the helicopter to that position.</p>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
     <p>Points: <span id="points">0</span></p>
   </div>
@@ -70,17 +70,28 @@
       y: canvas.height / 2,
       width: 50,
       height: 20,
-      speedY: 0,
-      gravity: 0.2,
     };
     const obstacles = [];
     let score = 0;
     const pointsElement = document.getElementById('points');
     let lastObstacleX = canvas.width;
-    
-    function jump() {
-      helicopter.speedY = -3;
+    let targetX = helicopter.x; // Added variable to store the target X position
+    const helicopterSpeed = 2; // Added variable to control the helicopter movement speed
+
+    // Function to move the helicopter to the target position
+    function moveHelicopter() {
+      if (helicopter.x < targetX) {
+        helicopter.x += helicopterSpeed; // Move right
+      } else if (helicopter.x > targetX) {
+        helicopter.x -= helicopterSpeed; // Move left
+      }
     }
+
+    function clickToMove(event) {
+      targetX = event.clientX - canvas.getBoundingClientRect().left - helicopter.width / 2; // Calculate the target X position based on the click location
+    }
+
+    canvas.addEventListener('click', clickToMove);
 
     function drawHelicopter() {
       context.fillStyle = 'red';
@@ -115,12 +126,7 @@
 
     function updateGameArea() {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      helicopter.speedY += helicopter.gravity;
-      helicopter.y += helicopter.speedY;
-      if (helicopter.y > canvas.height - helicopter.height) {
-        helicopter.y = canvas.height - helicopter.height;
-        helicopter.speedY = 0;
-      }
+      moveHelicopter(); // Move the helicopter
       drawHelicopter();
       drawObstacles();
       requestAnimationFrame(updateGameArea);
@@ -145,8 +151,7 @@
       obstacles.length = 0;
       score = 0;
       pointsElement.innerText = score;
-      helicopter.y = canvas.height / 2;
-      helicopter.speedY = 0;
+      helicopter.x = 50;
       lastObstacleX = canvas.width;
     }
 
