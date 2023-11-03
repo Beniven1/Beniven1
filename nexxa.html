@@ -102,7 +102,7 @@
       <a href="tetris.html">Tetris</a>
       <a href="heli.html">Heli</a>
       <a href="about-site.html">About Site</a> 
-      <a href="egg.html">Home</a> <!-- Link to the "current" page -->
+      <a href="egg.html">Nexxa</a> <!-- Link to the "current" page -->
     </nav>
   </header>
 
@@ -128,12 +128,12 @@
   <script>
     const solarSystem = document.getElementById("solar-system");
     const planets = [
-      { id: "sun", radius: 0, speed: 0.01 },
-      { id: "mercury", radius: 100, speed: 0.02 },
-      { id: "venus", radius: 150, speed: 0.015 },
-      { id: "earth", radius: 200, speed: 0.01 },
-      { id: "moon", radius: 30, speed: 0.03 },
-      { id: "mars", radius: 250, speed: 0.008 },
+      { id: "sun", radius: 0, speed: 0.01, color: "#ffcc00" }, /* Yellow */
+      { id: "mercury", radius: 100, speed: 0.02, color: "#b0b0b0" }, /* Gray */
+      { id: "venus", radius: 150, speed: 0.015, color: "#ff9900" }, /* Orange */
+      { id: "earth", radius: 200, speed: 0.01, color: "#3399ff" }, /* Blue */
+      { id: "moon", radius: 30, speed: 0.03, color: "#d9d9d9" }, /* Light Gray */
+      { id: "mars", radius: 250, speed: 0.008, color: "#ff3300" } /* Red */
       // Add more planets and moons here
     ];
 
@@ -147,6 +147,7 @@
         const y = planet.radius * Math.sin(angle);
         planetElements[index].style.left = `${300 + x}px`;
         planetElements[index].style.top = `${300 + y}px`;
+        planetElements[index].style.backgroundColor = planet.color;
       });
 
       requestAnimationFrame(updateSolarSystem);
