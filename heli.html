@@ -57,7 +57,7 @@
   </header>
   
   <div class="content">
-    <p>Welcome to the Helicopter Game! Click and move the mouse to control the helicopter's position.</p>
+    <p>Welcome to the Helicopter Game! Click anywhere to move the helicopter to that position.</p>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
     <p>Points: <span id="points">0</span></p>
   </div>
@@ -75,35 +75,31 @@
     let score = 0;
     const pointsElement = document.getElementById('points');
     let lastObstacleX = canvas.width;
-    let mouseTargetY = helicopter.y;
+    let clickX = helicopter.x;
+    let clickY = helicopter.y;
     const helicopterSpeed = 2;
-    const maxSpeedY = 3;
 
-    // Function to move the helicopter to follow the mouse's vertical position
+    // Function to move the helicopter to the clicked position
     function moveHelicopter() {
-      if (helicopter.y < mouseTargetY) {
+      if (helicopter.x < clickX) {
+        helicopter.x += helicopterSpeed;
+      } else if (helicopter.x > clickX) {
+        helicopter.x -= helicopterSpeed;
+      }
+      if (helicopter.y < clickY) {
         helicopter.y += helicopterSpeed;
-      } else if (helicopter.y > mouseTargetY) {
+      } else if (helicopter.y > clickY) {
         helicopter.y -= helicopterSpeed;
       }
-
-      // Add gravity
-      helicopter.y += helicopterSpeed;
-      
-      // Limit vertical speed
-      if (helicopter.y < 0) {
-        helicopter.y = 0;
-      } else if (helicopter.y + helicopter.height > canvas.height) {
-        helicopter.y = canvas.height - helicopter.height;
-      }
     }
 
-    // Function to update the mouse target position
-    function updateMouseTarget(event) {
-      mouseTargetY = event.clientY - canvas.getBoundingClientRect().top - helicopter.height / 2;
+    // Function to handle mouse click
+    function handleClick(event) {
+      clickX = event.clientX - canvas.getBoundingClientRect().left;
+      clickY = event.clientY - canvas.getBoundingClientRect().top;
     }
 
-    canvas.addEventListener('mousemove', updateMouseTarget);
+    canvas.addEventListener('click', handleClick);
 
     function drawHelicopter() {
       context.fillStyle = 'red';
