@@ -1,1 +1,12 @@
-
+Hourglass:
+  type: programming
+  tm_scope: source.dev
+  ace_mode: text
+  codemirror_mode: clike
+  codemirror_mime_type: text/x-java
+  color: "#ffa500"
+  extensions:
+  - ".dev"
+  - ".web"
+  - ".dat"
+  language_id: 425386
