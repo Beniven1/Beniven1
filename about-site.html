@@ -68,29 +68,44 @@
   </div>
 
   <script>
-    const halloweenDate = new Date('2023-10-31').getTime();
-    const now = new Date().getTime();
-    const timeDifference = halloweenDate - now;
+    const today = new Date();
+    const halloweenDate = new Date(today.getFullYear(), 9, 31).getTime();
 
-    // Check if it's Halloween or show the countdown
-    if (timeDifference < 0) {
+    // Check if today is Halloween
+    if (today.getMonth() === 9 && today.getDate() === 31) {
       document.getElementById('halloweenStatus').textContent = 'Happy Halloween!';
-    } else {
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-      document.getElementById('halloweenStatus').textContent = `Days till Halloween: ${days}`;
-      document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeDifference = halloweenDate - now;
+
+      if (timeDifference < 0) {
+        document.getElementById('countdown').textContent = 'Halloween has passed!';
+      } else {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
     }
 
     // Calculate the time the site has been up
-    const siteUpTime = new Date(now - halloweenDate);
-    const siteUpDays = siteUpTime.getUTCDate() - 1; // Subtract 1 to exclude the last day (Halloween)
-    const siteUpHours = siteUpTime.getUTCHours();
-    const siteUpMinutes = siteUpTime.getUTCMinutes();
-    const siteUpSeconds = siteUpTime.getUTCSeconds();
-    document.getElementById('siteUpTime').textContent = `${siteUpDays}d ${siteUpHours}h ${siteUpMinutes}m ${siteUpSeconds}s`;
+    setInterval(updateCountdown, 1000);
+
+    function calculateSiteUpTime() {
+      const siteUpTime = new Date(today - halloweenDate);
+      const siteUpDays = siteUpTime.getUTCDate() - 1; // Subtract 1 to exclude the last day (Halloween)
+      const siteUpHours = siteUpTime.getUTCHours();
+      const siteUpMinutes = siteUpTime.getUTCMinutes();
+      const siteUpSeconds = siteUpTime.getUTCSeconds();
+      document.getElementById('siteUpTime').textContent = `${siteUpDays}d ${siteUpHours}h ${siteUpMinutes}m ${siteUpSeconds}s`;
+    }
+
+    // Calculate the site's up time
+    calculateSiteUpTime();
+    setInterval(calculateSiteUpTime, 1000);
   </script>
 </body>
 </html>
