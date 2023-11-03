@@ -142,7 +142,7 @@
 
     function createObstacle() {
       const obstacleWidth = 20 + Math.random() * 80;
-      const space = 120 + Math.random() * 80;
+      const space = 80 + Math.random() * 40; // Adjust the space between obstacles
       const topHeight = Math.random() * (canvas.height - space);
       const bottomHeight = canvas.height - space - topHeight;
       obstacles.push({
