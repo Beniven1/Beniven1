@@ -48,6 +48,15 @@
 <body>
   <header>
     <h1>Tetris</h1>
+      <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="tetris.html">Tetris</a>
+      <a href="heli.html">Heli</a>
+      <a href="abput-site.html">About Site</a>
+      <a href="nexxa.html">Nexxa</a>
+    </nav>
   </header>
   
   <div class="content">
@@ -344,6 +353,56 @@ document.addEventListener('keydown', function(e) {
     tetromino.row = row;
   }
 });
+    // Event listeners for control buttons
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
+const rotateButton = document.getElementById('rotateButton');
+const dropButton = document.getElementById('dropButton');
+
+leftButton.addEventListener('click', () => {
+  if (gameOver) return;
+
+  // Implement the logic to move the Tetris piece to the left
+  const col = tetromino.col - 1;
+  if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+    tetromino.col = col;
+  }
+});
+
+rightButton.addEventListener('click', () => {
+  if (gameOver) return;
+
+  // Implement the logic to move the Tetris piece to the right
+  const col = tetromino.col + 1;
+  if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+    tetromino.col = col;
+  }
+});
+
+rotateButton.addEventListener('click', () => {
+  if (gameOver) return;
+
+  // Implement the logic to rotate the Tetris piece
+  const matrix = rotate(tetromino.matrix);
+  if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+    tetromino.matrix = matrix;
+  }
+});
+
+dropButton.addEventListener('click', () => {
+  if (gameOver) return;
+
+  // Implement the logic to make the Tetris piece drop instantly
+  let row = tetromino.row + 1;
+
+  while (isValidMove(tetromino.matrix, row, tetromino.col)) {
+    tetromino.row = row;
+    row++;
+  }
+
+  placeTetromino();
+});
+
 
 // start the game
 rAF = requestAnimationFrame(loop);
