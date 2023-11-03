@@ -34,9 +34,32 @@
     .planet {
       width: 50px; /* Adjust the planet size */
       height: 50px; /* Adjust the planet size */
-      background-color: #ccc;
       border-radius: 50%;
       position: absolute;
+    }
+
+    #sun {
+      background-color: #ffcc00; /* Yellow color for the Sun */
+    }
+
+    #mercury {
+      background-color: #b0b0b0; /* Gray color for Mercury */
+    }
+
+    #venus {
+      background-color: #ff9900; /* Orange color for Venus */
+    }
+
+    #earth {
+      background-color: #3399ff; /* Blue color for Earth */
+    }
+
+    #moon {
+      background-color: #d9d9d9; /* Light gray color for the Moon */
+    }
+
+    #mars {
+      background-color: #ff3300; /* Red color for Mars */
     }
 
     /* Header styling */
@@ -92,14 +115,44 @@
   <!-- Solar System Illustration -->
   <div id="solar-system">
     <!-- Sun -->
-    <div class="planet" id="sun" style="left: 275px; top: 275px;"></div>
+    <div class="planet" id="sun"></div>
     <!-- Planets and Moons -->
-    <div class="planet" id="mercury" style="left: 175px; top: 275px;"></div>
-    <div class="planet" id "venus" style="left: 225px; top: 275px;"></div>
-    <div class="planet" id="earth" style="left: 275px; top: 175px;"></div>
-    <div class="planet" id="moon" style="left: 305px; top: 135px;"></div>
-    <div class="planet" id="mars" style="left: 335px; top: 275px;"></div>
+    <div class="planet" id="mercury"></div>
+    <div class="planet" id="venus"></div>
+    <div class="planet" id="earth"></div>
+    <div class="planet" id="moon"></div>
+    <div class="planet" id="mars"></div>
     <!-- Add more planets and moons as needed -->
   </div>
+
+  <script>
+    const solarSystem = document.getElementById("solar-system");
+    const planets = [
+      { id: "sun", radius: 0, speed: 0.01 },
+      { id: "mercury", radius: 100, speed: 0.02 },
+      { id: "venus", radius: 150, speed: 0.015 },
+      { id: "earth", radius: 200, speed: 0.01 },
+      { id: "moon", radius: 30, speed: 0.03 },
+      { id: "mars", radius: 250, speed: 0.008 },
+      // Add more planets and moons here
+    ];
+
+    const planetElements = planets.map(planet => document.getElementById(planet.id));
+
+    function updateSolarSystem() {
+      const time = Date.now();
+      planets.forEach((planet, index) => {
+        const angle = planet.speed * time;
+        const x = planet.radius * Math.cos(angle);
+        const y = planet.radius * Math.sin(angle);
+        planetElements[index].style.left = `${300 + x}px`;
+        planetElements[index].style.top = `${300 + y}px`;
+      });
+
+      requestAnimationFrame(updateSolarSystem);
+    }
+
+    updateSolarSystem();
+  </script>
 </body>
 </html>
