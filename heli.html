@@ -57,7 +57,7 @@
   </header>
   
   <div class="content">
-    <p>Welcome to the Helicopter Game! Click anywhere to move the helicopter to that position.</p>
+    <p>Welcome to the Helicopter Game! Use clicks to move the helicopter and the arrow keys to move up and down.</p>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
     <p>Points: <span id="points">0</span></p>
   </div>
@@ -70,25 +70,61 @@
       y: canvas.height / 2,
       width: 50,
       height: 20,
+      speedX: 0,
+      speedY: 0,
+      gravity: 0.2,
     };
     const obstacles = [];
     let score = 0;
     const pointsElement = document.getElementById('points');
     let lastObstacleX = canvas.width;
-    let targetX = helicopter.x; // Added variable to store the target X position
-    const helicopterSpeed = 2; // Added variable to control the helicopter movement speed
+    let targetX = helicopter.x;
+    const helicopterSpeed = 2;
+    const maxSpeedY = 3; // Maximum vertical speed
 
     // Function to move the helicopter to the target position
     function moveHelicopter() {
       if (helicopter.x < targetX) {
-        helicopter.x += helicopterSpeed; // Move right
+        helicopter.speedX = helicopterSpeed;
       } else if (helicopter.x > targetX) {
-        helicopter.x -= helicopterSpeed; // Move left
+        helicopter.speedX = -helicopterSpeed;
+      } else {
+        helicopter.speedX = 0;
+      }
+
+      // Add gravity
+      helicopter.speedY += helicopter.gravity;
+
+      // Limit vertical speed
+      if (helicopter.speedY > maxSpeedY) {
+        helicopter.speedY = maxSpeedY;
+      }
+
+      // Move the helicopter
+      helicopter.x += helicopter.speedX;
+      helicopter.y += helicopter.speedY;
+
+      // Keep the helicopter within the canvas
+      if (helicopter.x < 0) {
+        helicopter.x = 0;
+        helicopter.speedX = 0;
+      }
+      if (helicopter.x + helicopter.width > canvas.width) {
+        helicopter.x = canvas.width - helicopter.width;
+        helicopter.speedX = 0;
+      }
+      if (helicopter.y < 0) {
+        helicopter.y = 0;
+        helicopter.speedY = 0;
+      }
+      if (helicopter.y + helicopter.height > canvas.height) {
+        helicopter.y = canvas.height - helicopter.height;
+        helicopter.speedY = 0;
       }
     }
 
     function clickToMove(event) {
-      targetX = event.clientX - canvas.getBoundingClientRect().left - helicopter.width / 2; // Calculate the target X position based on the click location
+      targetX = event.clientX - canvas.getBoundingClientRect().left - helicopter.width / 2;
     }
 
     canvas.addEventListener('click', clickToMove);
@@ -126,7 +162,7 @@
 
     function updateGameArea() {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      moveHelicopter(); // Move the helicopter
+      moveHelicopter();
       drawHelicopter();
       drawObstacles();
       requestAnimationFrame(updateGameArea);
@@ -152,11 +188,13 @@
       score = 0;
       pointsElement.innerText = score;
       helicopter.x = 50;
+      helicopter.y = canvas.height / 2;
+      helicopter.speedX = 0;
+      helicopter.speedY = 0;
       lastObstacleX = canvas.width;
     }
 
-    setInterval(createObstacle, 3000); // Create obstacles every 3 seconds with varying heights
-
+    setInterval(createObstacle, 3000);
     updateGameArea();
   </script>
 </body>
