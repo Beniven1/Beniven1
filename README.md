@@ -1,16 +1,16 @@
-## Hi there 👋
+# I'm Beniven
 
-<!--
-**Beniven1/Beniven1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I am a **Java Developer** making **Minecraft Mods**. You can find my official mod releases published on CurseForge.
 
-Here are some ideas to get you started:
+## 🛠️ My Work & Profiles
+* **CurseForge:** [Beniven on CurseForge](https://www.curseforge.com/members/beniven/projects)
+* **Reddit:** [u/Plane_Campaign_5355](https://www.reddit.com/u/Plane_Campaign_5355/s/E4YGOsC4ga) *(Where I talk about mod updates)*
+* **All My Links:** [bento.me/beniven](https://bento.me)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Dev
+* **Languages:** Java
+* **Tools & Frameworks:** Minecraft Neoforge / Fabric, Mixins, Gradle, Git
+
+## Featured Projects
+### [Kindled](https://www.curseforge.com/minecraft/mc-mods/kindled)
+*While I did not create the mod, I helped contribute to the art, and [ChiefArug](https://www.curseforge.com/members/chiefarug/projects) who created it did an excellent job.*
