@@ -2,7 +2,7 @@
 
 I am a **Java Developer** making **Minecraft Mods**. You can find my official mod releases published on CurseForge.
 
-## My Work & Profiles
+## Places Where I Might Be
 * **CurseForge:** [Beniven on CurseForge](https://www.curseforge.com/members/beniven/projects)
 * **Modrinth:** [Beniven on Modrinth](https://modrinth.com/user/Beniven)
 * **Reddit:** [u/Plane_Campaign_5355](https://www.reddit.com/u/Plane_Campaign_5355/s/E4YGOsC4ga) *(Where I talk about mod updates)*
