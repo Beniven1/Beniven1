@@ -7,6 +7,7 @@ I am a **Java Developer** making **Minecraft Mods**. You can find my official mo
 * **Modrinth:** [Beniven on Modrinth](https://modrinth.com/user/Beniven)
 * **Reddit:** [u/Plane_Campaign_5355](https://www.reddit.com/u/Plane_Campaign_5355/s/E4YGOsC4ga) *(Where I talk about mod updates)*
 * **All My Links:** [linktr.ee/beniven](https://linktr.ee/beniven)
+* **Vynity** [My own music platform](https://vynity.app)
 
 ## Dev
 * **Languages:** Java
