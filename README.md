@@ -10,8 +10,8 @@ I am a **Developer** making **things**. My current project is *[Vynity](https://
 * **Reddit:** [u/Plane_Campaign_5355](https://www.reddit.com/u/Plane_Campaign_5355/s/E4YGOsC4ga) *(Where I talk about any updates)*
 
 ## Dev
-* **Languages:** Java, NodeJS
-* **Tools & Frameworks:** Minecraft Neoforge / Fabric, Mixins, Gradle, Git
+* **Languages:** Java, JavaScript
+* **Tools & Frameworks:** Minecraft Neoforge / Fabric, Mixins, Gradle, Git, Node.js
 
 ## Featured Projects
 ### [Vynity](https://vynity.app)
